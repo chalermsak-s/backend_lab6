@@ -42,6 +42,18 @@ router.get('/', async (req: Request, res: Response) => {
   }
 })
 
+// router.get("/", async (req: Request, res: Response) => {
+//   const events = await service.getAllEvents();
+//   if (req.query.category) {
+//     const category = req.query.category;
+//     const filteredEvents = events.filter((event) => event.category === category);
+//     res.json(filteredEvents);
+//     } else {
+//     res.json(events);
+//     }
+// });
+
+
 router.get('/:id', async (req: Request, res: Response) => {
   const id = parseInt(req.params.id)
   const event = await service.getEventById(id)
