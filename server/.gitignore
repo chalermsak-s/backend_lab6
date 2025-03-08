@@ -63,3 +63,6 @@ jest.cache/
 .pnp/
 .pnp.js
 .parcel-cache/
+
+prisma/migrations/
+prisma/migrations/migration_lock.toml

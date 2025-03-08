@@ -1,13 +1,11 @@
-import { PrismaClient } from '@prisma/client'
-import { createBooks } from './db/createBooks'
-import { createMembers } from './db/createMemebers'
-import { createBorrowings } from './db/createBorrowings'
+import { createEvents } from './db/createEvents';
+import { PrismaClient } from '@prisma/client';
+import { createParticipants } from './db/createParticipants';
 
-const prisma = new PrismaClient()
-
-async function mainRun() {
-  await createBooks()
-  await createMembers()
-  await createBorrowings()
+const prisma = new PrismaClient();
+async function main() {
+  await createEvents();
+  await createParticipants();
 }
-mainRun()
+
+main()

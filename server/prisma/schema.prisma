@@ -11,6 +11,7 @@ generator client {
 // datasource db {
 //   provider = "mysql"
 //   url      = env("DATABASE_URL")
+
 // }
 
 datasource db {
@@ -18,39 +19,32 @@ datasource db {
   url      = env("DIRECT_URL")
 }
 
-model book {
-  id          Int  @id @default(autoincrement())
-  title       String
-  isbn        String
-  category    String
-  authorId    Int?
-  author      author?  @relation(fields: [authorId], references: [id])
-  borrowings  borrowing[]
+
+model event {
+  id           Int           @id @default(autoincrement())
+  category     String
+  title        String
+  description  String
+  location     String
+  date         String
+  time         String
+  petsAllowed  Boolean
+  organizerId  Int?
+  organizer    organizer?    @relation(fields: [organizerId], references: [id])
+  participants participant[]
 }
 
-model author {
-  id          Int  @id @default(autoincrement())
-  firstName   String
-  lastName    String
-  affiliation String?
-  books       book[]
+model organizer {
+  id     Int     @id @default(autoincrement())
+  name   String
+  events event[]
 }
 
-model member {
-  id         Int  @id @default(autoincrement())
-  firstName  String
-  lastName   String
-  phone      String
-  borrowings borrowing[]
+model participant {
+  id     Int     @id @default(autoincrement())
+  name   String
+  email  String
+  events event[] 
 }
 
-model borrowing {
-  id            Int   @id @default(autoincrement())
-  memberId      Int
-  member        member   @relation(fields: [memberId], references: [id])
-  bookId        Int
-  book          book     @relation(fields: [bookId], references: [id])
-  borrowedAt    DateTime @default(now())
-  dueDate       DateTime
-  returnedAt    DateTime?
-}
+

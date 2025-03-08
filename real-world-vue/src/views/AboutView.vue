@@ -1,8 +1,7 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div>
-   <h1>About Page</h1>
+    <h1>About For Good</h1>
   </div>
 </template>

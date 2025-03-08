@@ -6,14 +6,19 @@ defineProps<{ event: Event }>();
 <template>
   <div class="event-class">
     <div class="event-card">
-      <h2>{{ event.title }}</h2>
-      <p>{{ event.description }}</p>
+      <h2>{{ event.category }}</h2>
+      <p>{{ event.organizer.name }}</p>
       <span>@{{ event.time }} on {{ event.date }}</span>
     </div>
   </div>
 </template>
 
 <style scoped>
+.event-class{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .event-card {
   padding: 20px;
   width: 250px;

@@ -1,24 +1,46 @@
-import express, { Request, Response } from 'express'
-import dotenv from 'dotenv'
-import bookRoute from './routes/bookRoute'
-import authorRoute from './routes/authorRoute'
-import memberRoute from './routes/memberRoute'
-import borrowingRoute from './routes/borrowingRoute'
+import express, { Request, Response } from "express";
+import multer from "multer";
+import dotenv from "dotenv";
+import eventRoute from "./routes/eventRoute";
+import cors from "cors";
+dotenv.config();
 
-dotenv.config()
-const app = express()
-const PORT = process.env.PORT || 3838
+import { uploadFile } from "./services/uploadFileService";
+const app = express();
+const allowedOrigins = ["http://localhost:5173"];
 
-// Middleware
-app.use(express.json())
+const options: cors.CorsOptions = {
+  origin: allowedOrigins,
+};
+// Then pass these options to cors:
++app.use(cors(options));
 
-// Routes
-app.use('/books', bookRoute)
-app.use('/authors', authorRoute)
-app.use('/members', memberRoute)
-app.use('/borrow', borrowingRoute)
+app.use(express.json());
+app.use("/events", eventRoute);
+const port = process.env.PORT || 3000;
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`)
-})
+const upload = multer({ storage: multer.memoryStorage() });
+
+app.post("/upload", upload.single("file"), async (req: any, res: any) => {
+  try {
+    const file = req.file;
+    if (!file) {
+      return res.status(400).send("No file uploaded.");
+    }
+
+    const bucket = process.env.SUPABASE_BUCKET_NAME;
+    const filePath = process.env.UPLOAD_DIR;
+
+    if (!bucket || !filePath) {
+      return res.status(500).send("Bucket name or file path not configured.");
+    }
+    const ouputUrl = await uploadFile(bucket, filePath, file);
+
+    res.status(200).send(ouputUrl);
+  } catch (error) {
+    res.status(500).send("Error uploading file.");
+  }
+});
+app.listen(port, () => {
+  console.log(`App listening at http://localhost:${port}`);
+});
