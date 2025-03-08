@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import EventCard from "@/components/EventCard.vue";
 import eventService from "@/services/EventService";
-import { ref, computed, watchEffect } from 'vue'
-import type { Event } from '@/types'
-import { useRouter } from 'vue-router'
-const router = useRouter()
+import { ref, computed, watchEffect } from "vue";
+import type { Event } from "@/types";
+import { useRouter } from "vue-router";
+import nProgress from "nprogress";
+const router = useRouter();
 const events = ref<Event[]>([]);
-const totalEvents = ref(0)
+const totalEvents = ref(0);
 const hasNextPage = computed(() => {
-  const totalPages = Math.ceil(totalEvents.value / 2)
-  return page.value < totalPages
-})
+  const totalPages = Math.ceil(totalEvents.value / 2);
+  return page.value < totalPages;
+});
 
 interface Props {
   page: number;
@@ -22,14 +23,17 @@ watchEffect(() => {
   eventService
     .getEvents(page.value, 2)
     .then((response) => {
-      events.value = response.data
-      totalEvents.value = response.headers['x-total-count']
+      nProgress.start();
+      events.value = response.data;
+      totalEvents.value = response.headers["x-total-count"];
     })
     .catch(() => {
-      router.push({ name: 'network-error-view' })
+      router.push({ name: "network-error-view" });
     })
-})
-
+    .finally(() => {
+      nProgress.done();
+    });
+});
 
 eventService.getEvents(page.value, 2).then((response: any) => {
   events.value = response.data;
@@ -94,4 +98,5 @@ eventService.getEvents(page.value, 2).then((response: any) => {
 #page-next {
   text-align: right;
 }
+@import "nprogress/nprogress.css";
 </style>

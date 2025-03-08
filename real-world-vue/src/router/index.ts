@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import nProgress from "nprogress";
 import AboutView from "@/views/AboutView.vue"; // เปลี่ยนชื่อให้สื่อความหมาย
 
 import EventListView from "@/views/EventListView.vue";
@@ -69,5 +70,14 @@ const router = createRouter({
     },
   ],
 });
+
+router.beforeEach(() => {
+    nProgress.start()
+  })
+  
+  router.afterEach(() => {
+    nProgress.done()
+  })
+  
 
 export default router;
