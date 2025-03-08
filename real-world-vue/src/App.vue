@@ -1,3 +1,6 @@
+<script setup lang="ts">
+import EventListViewVue from "./views/EventListView.vue";
+</script>
 <template>
   <div id="layout">
     <header>
@@ -5,6 +8,7 @@
         <nav>
           <RouterLink to="/">Home</RouterLink> |
           <RouterLink to="/about">About</RouterLink>
+          <EventListViewVue />
         </nav>
       </div>
     </header>

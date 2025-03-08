@@ -11,4 +11,5 @@ import EventListView from '../views/EventListView.vue'
      },
     ]
 })
+export default router
 
