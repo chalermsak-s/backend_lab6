@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from "vue-router";
 import EventListView from "../views/EventListView.vue";
 import AboutView from "../views/AboutView.vue"; // เปลี่ยนชื่อให้สื่อความหมาย
 import EventDetailView from "../views/EventDetailView.vue";
-import EventView from "../views/EventView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,6 +10,9 @@ const router = createRouter({
       path: "/",
       name: "event-list-view",
       component: EventListView,
+      props: (route) => ({
+        page: parseInt(route.query.page as string) || 1,
+      }),
     },
     {
       path: "/about",

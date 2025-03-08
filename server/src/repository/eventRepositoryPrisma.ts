@@ -85,15 +85,22 @@ export async function getAllEventsWithOrganizerPagination(
     where,
     skip: pageSize * (pageNo - 1),
     take: pageSize,
-    omit: {
-      organizerId: true,
-    },
     include: {
       organizer: {
-        select: {},
+        select: {
+          name: true,
+        },
+      },
+      participants: {
+        select: {
+          id: true,
+          name: true,
+          email: true,
+        },
       },
     },
   });
+
   const count = await prisma.event.count({ where });
   return { count, events } as PageEvent;
 }

@@ -2,4 +2,4 @@
 GET  http://localhost:3000/events HTTP/1.1
 
 ### Events
-GET  http://localhost:3000/events?pageSize=2&pageNo=3 HTTP/1.1
+GET  http://localhost:3000/events?pageSize=1&pageNo=3 HTTP/1.1
