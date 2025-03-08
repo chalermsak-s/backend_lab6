@@ -1,10 +1,15 @@
 <script setup lang="ts">
-defineProps<{ event: { id: number; name: string } }>();
+import type { Event } from "@/types";
+defineProps<{ event: Event }>();
 </script>
 
 <template>
-  <div class="event-card">
-    <h3>{{ event.name }}</h3>
+  <div class="event-class">
+    <div class="event-card">
+      <h2>{{ event.title }}</h2>
+      <p>{{ event.description }}</p>
+      <span>@{{ event.time }} on {{ event.date }}</span>
+    </div>
   </div>
 </template>
 
