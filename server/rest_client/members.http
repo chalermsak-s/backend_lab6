@@ -1,0 +1,22 @@
+### member list
+GET  http://localhost:3838/members HTTP/1.1
+
+### member list by id
+GET  http://localhost:3838/members/2 HTTP/1.1
+
+### member list by borrow book
+GET  http://localhost:3838/members/book/1 HTTP/1.1
+
+### member list by group
+GET  http://localhost:3838/members/group/คอมพิวเตอร์,พัฒนาเว็บ,ออกแบบเว็บ HTTP/1.1
+
+### member create
+POST http://localhost:3838/members HTTP/1.1
+content-type: application/json
+
+{
+    "title": "ReactJs17 สำหรับพัฒนาเว็บ",
+    "isbn": "I669609978399",
+    "category": "พัฒนาเว็บ",
+    "authorId": 1
+}

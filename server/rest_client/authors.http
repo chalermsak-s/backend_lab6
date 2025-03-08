@@ -1,0 +1,33 @@
+### Author List
+GET  http://localhost:3838/authors HTTP/1.1
+
+### Author List by ID
+GET  http://localhost:3838/authors/3 HTTP/1.1
+
+
+### Author By Book
+GET  http://localhost:3838/authors/book/3 HTTP/1.1
+
+### Author By affiliation
+GET  http://localhost:3838/authors/affiliation/1 HTTP/1.1
+
+
+### Author Create
+POST http://localhost:3838/authors HTTP/1.1
+content-type: application/json
+
+{
+  "author": {
+    "firstName": "Takmashido",
+    "lastName": "Suzuran",
+    "affiliation": "พัฒนาซอฟต์แวร์"
+  },
+  "book": {
+    "title": "Rust zero",
+    "isbn": "r3382783293",
+    "category": "สำนักพิมพ์มหาวิทยาลัยเชียงใหม่"
+  }
+}
+
+
+

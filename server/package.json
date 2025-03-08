@@ -1,0 +1,41 @@
+{
+  "name": "lab04_task8",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "dev": "nodemon",
+    "seed": "ts-node src/seed.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://chalermsak-s@github.com/chalermsak-s/backend_lab02_task8_11.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chalermsak-s/backend_lab02_task8_11/issues"
+  },
+  "homepage": "https://github.com/chalermsak-s/backend_lab02_task8_11#readme",
+  "description": "",
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.1",
+    "nodemon": "^3.1.9",
+    "prisma": "^6.4.1",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.749.0",
+    "@prisma/client": "^6.4.1",
+    "@prisma/extension-accelerate": "^1.2.2",
+    "@types/multer": "^1.4.12",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}

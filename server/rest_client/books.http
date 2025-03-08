@@ -1,0 +1,22 @@
+### Book List
+GET  http://localhost:3838/books HTTP/1.1
+
+### Book List by ID
+GET  http://localhost:3838/books/1 HTTP/1.1
+
+### Book List by Cate
+GET  http://localhost:3838/books/category/คอมพิวเตอร์ HTTP/1.1
+
+### Book List by Group
+GET  http://localhost:3838/books/group/คอมพิวเตอร์,พัฒนาเว็บ,ออกแบบเว็บ HTTP/1.1
+
+### Book Create
+POST http://localhost:3838/books HTTP/1.1
+content-type: application/json
+
+{
+    "title": "ReactJs17 สำหรับพัฒนาเว็บ",
+    "isbn": "I669609978399",
+    "category": "พัฒนาเว็บ",
+    "authorId": 1
+}

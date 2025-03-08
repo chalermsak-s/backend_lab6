@@ -1,0 +1,27 @@
+### Borrowing List
+GET  http://localhost:3838/borrow/ HTTP/1.1
+
+### Borrowing List by ID
+GET  http://localhost:3838/borrow/1 HTTP/1.1
+
+### Borrowing List by ID show Member Detail , Book Detail
+GET  http://localhost:3838/borrow/detail/1 HTTP/1.1
+
+### Borrowing List by Borrow by Member
+GET  http://localhost:3838/borrow/member/1 HTTP/1.1
+
+
+### Borrowing List by ID show Book Detail
+GET  http://localhost:3838/borrow/book/3 HTTP/1.1
+
+
+### Brrowing create
+POST http://localhost:3838/borrow/add HTTP/1.1
+content-type: application/json
+
+{
+  "memberId": 2,
+  "bookId": 2,
+  "borrowedAt": "2025-02-25T12:00:00.000Z",
+  "dueDate": "2025-02-25T12:00:00.000Z"
+}
