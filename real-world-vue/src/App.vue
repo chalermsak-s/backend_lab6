@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import EventListViewVue from "./views/EventListView.vue";
+import { RouterLink, RouterView } from "vue-router";
 </script>
+
 <template>
   <div id="layout">
     <header>
@@ -8,12 +9,16 @@ import EventListViewVue from "./views/EventListView.vue";
         <nav>
           <RouterLink to="/">Home</RouterLink> |
           <RouterLink to="/about">About</RouterLink>
-          <EventListViewVue />
         </nav>
       </div>
     </header>
+    
+    <main>
+      <RouterView />
+    </main>
   </div>
 </template>
+
 <style scoped>
 #layout {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -22,14 +27,23 @@ import EventListViewVue from "./views/EventListView.vue";
   text-align: center;
   color: #2c3e50;
 }
+
 nav {
   padding: 30px;
 }
+
 nav a {
   font-weight: bold;
   color: #2c3e50;
+  text-decoration: none;
+  padding: 0 10px;
 }
+
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+main {
+  padding: 20px;
 }
 </style>

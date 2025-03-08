@@ -1,15 +1,21 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import EventListView from '../views/EventListView.vue'
- 
- const router = createRouter({
-   history: createWebHistory(import.meta.env.BASE_URL),
-   routes: [
-     {
-       path: '/',
-      name: 'event-list-view',
-      component: EventListView,
-     },
-    ]
-})
-export default router
+import AboutView from '../views/AboutView.vue' // เปลี่ยนชื่อให้สื่อความหมาย
 
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [
+    {
+      path: '/',
+      name: 'event-list',
+      component: EventListView,
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: AboutView,
+    },
+  ],
+})
+
+export default router

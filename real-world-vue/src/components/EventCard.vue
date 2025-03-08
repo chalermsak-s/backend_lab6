@@ -1,9 +1,10 @@
 <script setup lang="ts">
+defineProps<{ event: { id: number; name: string } }>();
 </script>
 
 <template>
-  <div class="event-class">
-    <h1>This is an event page</h1>
+  <div class="event-card">
+    <h3>{{ event.name }}</h3>
   </div>
 </template>
 
