@@ -2,9 +2,11 @@
 import { ref, onMounted } from "vue";
 import type { Event } from "@/types";
 import eventService from "@/services/EventService";
+import { useRouter } from "vue-router";
 const event = ref<Event>();
 const props = defineProps<{ id: string }>();
 const id = Number(props.id);
+const router = useRouter();
 import { RouterLink, RouterView } from "vue-router";
 
 onMounted(() => {
@@ -14,7 +16,14 @@ onMounted(() => {
       event.value = response.data;
     })
     .catch((error: any) => {
-      console.error("There was an error!", error);
+      if (error.response && error.response.status === 404) {
+        router.push({
+          name: "404-resource-view",
+          params: { resource: "event" },
+        });
+      } else {
+        router.push({ name: "network-error-view" });
+      }
     });
 });
 </script>
@@ -33,7 +42,7 @@ onMounted(() => {
         >Edit</RouterLink
       >
     </nav>
-    <RouterView :event="event"/>
+    <RouterView :event="event" />
   </div>
   <div v-else>
     <p>Loading...</p>

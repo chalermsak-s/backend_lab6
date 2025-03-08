@@ -8,7 +8,7 @@ interface EventResponse {
   data: Event[]
 }
 
-eventService.getEvents().then((response:EventRespose) => {
+eventService.getEvents(1,2).then((response:EventResponse) => {
    events.value = response.data
  })
 </script>
