@@ -1,35 +1,13 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import type { Event } from "@/types";
-import eventService from "@/services/EventService";
-const event = ref<Event>();
-const props = defineProps<{ id: string }>();
-const id = Number(props.id);
-eventService
-  .getEvent(id)
-  .then((response: any) => {
-    event.value = response.data;
-  })
-
-  .catch((error: any) => {
-    console.error("There was an error!", error);
-  });
+import { toRefs } from 'vue'
+import type { Event } from '@/types'
+const props = defineProps<{
+ event: Event
+ id: string
+}>()
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const { event } = toRefs(props)
 </script>
-
 <template>
-  <div v-if="event">
-    <h1>{{ event.title }}</h1>
-    <nav>
-      <router-link :to="{ name: 'event-detail-view', params: { id } }"
-        >Details</router-link
-      >
-      <router-link :to="{ name: 'event-register-view', params: { id } }"
-        >Register</router-link
-      >
-      <router-link :to="{ name: 'event-edit-view', params: { id } }"
-        >Edit</router-link
-      >
-    </nav>
-    <p>Register event here</p>
-  </div>
+ <p>Register event here</p>
 </template>

@@ -1,25 +1,41 @@
-<script>
-export default {
-  props: {
-    event: Object,
-  },
-};
+<script setup lang="ts">
+import { ref, onMounted } from "vue";
+import type { Event } from "@/types";
+import eventService from "@/services/EventService";
+const event = ref<Event>();
+const props = defineProps<{ id: string }>();
+const id = Number(props.id);
+import { RouterLink, RouterView } from "vue-router";
+
+onMounted(() => {
+  eventService
+    .getEvent(id)
+    .then((response: any) => {
+      event.value = response.data;
+    })
+    .catch((error: any) => {
+      console.error("There was an error!", error);
+    });
+});
 </script>
+
 <template>
   <div v-if="event">
+    <h1>{{ event.title }}</h1>
     <nav>
-      <router-link :to="{ name: 'event-detail-view', params: { id: event.id } }"
-        >Details</router-link
+      <RouterLink :to="{ name: 'event-detail-view', params: { id } }"
+        >Details</RouterLink
       >
-      |
-      <router-link
-        :to="{ name: 'event-register-view', params: { id: event.id } }"
-        >Register</router-link
+      <RouterLink :to="{ name: 'event-register-view', params: { id } }"
+        >Register</RouterLink
       >
-      |
-      <router-link :to="{ name: 'event-edit-view', params: { id: event.id } }"
-        >Edit</router-link
+      <RouterLink :to="{ name: 'event-edit-view', params: { id } }"
+        >Edit</RouterLink
       >
     </nav>
+    <RouterView :event="event"/>
+  </div>
+  <div v-else>
+    <p>Loading...</p>
   </div>
 </template>
