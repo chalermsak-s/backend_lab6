@@ -9,6 +9,8 @@ import EventLayoutView from "@/views/event/LayoutView.vue";
 import EventEditView from "@/views/event/EditView.vue";
 import NotFoundView from "@/views/NotFoundView.vue";
 import NetworkErrorView from "@/views/NetworkErrorView.vue";
+
+import LoginView from "@/views/LoginView.vue";
 import { useEventStore } from "@/stores/event";
 import eventService from "@/services/EventService";
 
@@ -27,6 +29,11 @@ const router = createRouter({
       path: "/about",
       name: "about",
       component: AboutView,
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: LoginView,
     },
     {
       path: "/network-error",
