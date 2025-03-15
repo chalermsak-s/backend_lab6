@@ -4,7 +4,12 @@ import * as yup from "yup";
 // import { ref } from 'vue'
 import { useField, useForm } from "vee-validate";
 import { useAuthStore } from "@/stores/auth";
+import { useRouter } from "vue-router";
+import { useMessageStore } from "@/stores/message";
+const messageStore = useMessageStore();
+
 const authStore = useAuthStore();
+const router = useRouter();
 
 const validationSchema = yup.object({
   email: yup
@@ -26,14 +31,19 @@ const { errors, handleSubmit } = useForm({
 const { value: email } = useField<string>("email");
 const { value: password } = useField<string>("password");
 
-const onSubmit = handleSubmit(async (values) => {
-  try {
-    const response = await authStore.login(values.email, values.password);
-    console.log(response.data.access_token);
-  } catch {
-    console.log("unauthorized");
+const onSubmit = handleSubmit(
+  async (values: { email: string; password: string }) => {
+    try {
+      await authStore.login(values.email, values.password);
+      router.push({ name: "event-list-view" });
+    } catch {
+      messageStore.updateMessage("Could not login");
+      setTimeout(() => {
+        messageStore.resetMessage();
+      }, 3000);
+    }
   }
-});
+);
 </script>
 <template>
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
