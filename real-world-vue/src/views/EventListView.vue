@@ -98,5 +98,4 @@ eventService.getEvents(page.value, 3).then((response: any) => {
 #page-next {
   text-align: right;
 }
-@import "nprogress/nprogress.css";
 </style>
