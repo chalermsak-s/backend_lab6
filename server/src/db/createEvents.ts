@@ -88,7 +88,7 @@ export async function createEvents() {
   
   const cmuOrg = await prisma.organizer.create({
     data: {
-      name: 'Chiang Mai Uniersity'
+      name: 'Chiang Mai University'
     }
   })
   
