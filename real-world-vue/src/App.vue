@@ -16,6 +16,13 @@ function logout() {
   authStore.logout();
   router.push({ name: "login" });
 }
+const token = localStorage.getItem("token");
+const user = localStorage.getItem("user");
+if (token && user) {
+  authStore.reload(token, JSON.parse(user));
+} else {
+  authStore.logout();
+}
 </script>
 
 <template>

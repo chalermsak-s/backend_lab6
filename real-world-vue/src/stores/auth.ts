@@ -42,5 +42,9 @@ export const useAuthStore = defineStore("auth", {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
     },
+    reload(token: string, user: Organizer) {
+      this.token = token;
+      this.user = user;
+    },
   },
 });
