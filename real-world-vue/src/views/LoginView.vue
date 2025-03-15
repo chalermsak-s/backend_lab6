@@ -3,6 +3,9 @@ import InputText from "@/components/InputText.vue";
 import * as yup from "yup";
 // import { ref } from 'vue'
 import { useField, useForm } from "vee-validate";
+import { useAuthStore } from "@/stores/auth";
+const authStore = useAuthStore();
+
 const validationSchema = yup.object({
   email: yup
     .string()
@@ -22,35 +25,50 @@ const { errors, handleSubmit } = useForm({
 });
 const { value: email } = useField<string>("email");
 const { value: password } = useField<string>("password");
-const onSubmit = handleSubmit((values) => {
-  console.log(values);
+
+const onSubmit = handleSubmit(async (values) => {
+  try {
+    const response = await authStore.login(values.email, values.password);
+    console.log(response.data.access_token);
+  } catch {
+    console.log("unauthorized");
+  }
 });
 </script>
 <template>
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form class="space-y-6" @submit.prevent="onSubmit">
-        <div>
-          <label for="email" class="block text-sm font-medium leading-6 text-gray-900"
-            >Email address</label
-          >
-          <InputText
-            id="email"
-            type="email"
-            v-model="email"
-            placeholder="Email address"
-            :error="errors['email']"
-          />
-        </div>
-        <div>
-          <InputText
-            type="password"
-            v-model="password"
-            placeholder="Password"
-            :error="errors['password']"
-            autocomplete="false"
-          />
-        </div>
-      </form>
+    <form class="space-y-6" @submit.prevent="onSubmit">
+      <div>
+        <label
+          for="email"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Email address</label
+        >
+        <InputText
+          id="email"
+          type="email"
+          v-model="email"
+          placeholder="Email address"
+          :error="errors['email']"
+        />
+      </div>
+      <div>
+        <InputText
+          type="password"
+          v-model="password"
+          placeholder="Password"
+          :error="errors['password']"
+          autocomplete="false"
+        />
+      </div>
+      <div>
+        <button
+          type="submit"
+          class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          Sign in
+        </button>
+      </div>
+    </form>
   </div>
 </template>
-
