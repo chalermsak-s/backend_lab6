@@ -13,7 +13,7 @@ const options: cors.CorsOptions = {
   origin: allowedOrigins,
 };
 // Then pass these options to cors:
-+app.use(cors(options));
+app.use(cors(options));
 
 app.use(express.json());
 app.use("/events", eventRoute);
