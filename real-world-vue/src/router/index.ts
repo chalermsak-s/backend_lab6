@@ -11,6 +11,7 @@ import NotFoundView from "@/views/NotFoundView.vue";
 import NetworkErrorView from "@/views/NetworkErrorView.vue";
 
 import LoginView from "@/views/LoginView.vue";
+import { useAuthStore } from "@/stores/auth";
 import { useEventStore } from "@/stores/event";
 import eventService from "@/services/EventService";
 
@@ -94,6 +95,15 @@ const router = createRouter({
           name: "event-edit-view",
           component: EventEditView,
           props: true,
+          beforeEnter: () => {
+            const authStore = useAuthStore();
+            if (!authStore.isAdmin) {
+              return {
+                name: "404-resource-view",
+                params: { resource: "you-are-not-allowed-to-access" },
+              };
+            }
+          },
         },
       ],
     },

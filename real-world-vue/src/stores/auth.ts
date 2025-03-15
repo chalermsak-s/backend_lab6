@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-import type { Organizer } from "@/types";
 import type { User } from '@/types'
 import apiClient from "@/services/AxiosClient";
 
@@ -44,7 +43,7 @@ export const useAuthStore = defineStore("auth", {
       console.log("logout");
       this.token = null;
       this.user = null;
-      localStorage.removeItem("token");
+      localStorage.removeItem("access_token");
       localStorage.removeItem("user");
     },
     reload(token: string, user: User) {
