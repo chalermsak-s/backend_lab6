@@ -20,6 +20,7 @@ const register = () => {
   }, 3000);
   router.push({ name: "event-detail-view" });
 };
+console.log(event);
 </script>
 <template>
   <div>
